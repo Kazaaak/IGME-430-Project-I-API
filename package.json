@@ -1,0 +1,26 @@
+{
+  "name": "igme-430-project-i-api",
+  "version": "1.0.0",
+  "description": "Project 1 for IGME 430 - A simple API that receives user character data and displays it back to them in an easily-digestible format",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./src/server.js",
+    "pretest": "eslint ./src --fix",
+    "test": "echo \"Tests complete\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kazaaak/IGME-430-Project-I-API.git"
+  },
+  "author": "Kazvalech",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/Kazaaak/IGME-430-Project-I-API/issues"
+  },
+  "homepage": "https://github.com/Kazaaak/IGME-430-Project-I-API#readme",
+  "devDependencies": {
+    "eslint": "^8.34.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-import": "^2.27.5"
+  }
+}
