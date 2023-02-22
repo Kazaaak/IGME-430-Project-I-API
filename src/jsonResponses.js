@@ -1,4 +1,4 @@
-const users = {};
+const characters = {};
 
 // function to respond with a json object
 // takes request, response, status code and object to send
@@ -15,22 +15,22 @@ const respondJSONMeta = (request, response, status) => {
   response.end();
 };
 
-// return user object as JSON
-const getUsers = (request, response) => {
+// return character object as JSON
+const getCharacters = (request, response) => {
   const responseJSON = {
-    users,
+    characters,
   };
 
   respondJSON(request, response, 200, responseJSON);
 };
 
-const getUsersMeta = (request, response) => {
+const getCharactersMeta = (request, response) => {
 // return 200 without message, just the meta data
   respondJSONMeta(request, response, 200);
 };
 
-// function to add a user from a POST body
-const addUser = (request, response, body) => {
+// function to add a character from a POST body
+const addCharacter = (request, response, body) => {
   // default json message
   const responseJSON = {
     message: 'Name and age are both required.',
@@ -46,16 +46,16 @@ const addUser = (request, response, body) => {
   // default status code to 204 updated
   let responseCode = 204;
 
-  // If the user doesn't exist yet
-  if (!users[body.name]) {
-    // Set the status code to 201 (created) and create an empty user
+  // If the character doesn't exist yet
+  if (!characters[body.name]) {
+    // Set the status code to 201 (created) and create an empty character
     responseCode = 201;
-    users[body.name] = {};
+    characters[body.name] = {};
   }
 
-  // add or update fields for this user name
-  users[body.name].name = body.name;
-  users[body.name].age = body.age;
+  // add or update fields for this character name
+  characters[body.name].name = body.name;
+  characters[body.name].age = body.age;
 
   // if response is created, then set our created message
   // and sent response with a message
@@ -85,9 +85,9 @@ const notFoundMeta = (request, response) => {
 
 // public exports
 module.exports = {
-  getUsers,
-  getUsersMeta,
-  addUser,
+  getCharacters,
+  getCharactersMeta,
+  addCharacter,
   notFound,
   notFoundMeta,
 };

@@ -40,11 +40,11 @@ const parseBody = (request, response, handler) => {
 
 // handle POST requests
 const handlePost = (request, response, parsedUrl) => {
-  // If they go to /addUser
-  if (parsedUrl.pathname === '/addUser') {
+  // If they go to /addCharacter
+  if (parsedUrl.pathname === '/addCharacter') {
     // Call our below parseBody handler, and in turn pass in the
-    // jsonHandler.addUser function as the handler callback function.
-    parseBody(request, response, jsonHandler.addUser);
+    // jsonHandler.addCharacter function as the handler callback function.
+    parseBody(request, response, jsonHandler.addCharacter);
   }
 };
 
@@ -55,8 +55,8 @@ const handleGet = (request, response, parsedUrl) => {
     htmlHandler.getIndex(request, response);
   } else if (parsedUrl.pathname === '/style.css') {
     htmlHandler.getCSS(request, response);
-  } else if (parsedUrl.pathname === '/getUsers') {
-    jsonHandler.getUsers(request, response);
+  } else if (parsedUrl.pathname === '/getCharacters') {
+    jsonHandler.getCharacters(request, response);
   } else {
     jsonHandler.notFound(request, response);
   }
@@ -65,8 +65,8 @@ const handleGet = (request, response, parsedUrl) => {
 // handle HEAD requests
 const handleHead = (request, response, parsedUrl) => {
   // route to correct method based on url
-  if (parsedUrl.pathname === '/getUsers') {
-    jsonHandler.getUsersMeta(request, response);
+  if (parsedUrl.pathname === '/getCharacters') {
+    jsonHandler.getCharactersMeta(request, response);
   } else {
     jsonHandler.notFoundMeta(request, response);
   }
