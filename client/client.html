@@ -34,8 +34,14 @@
           break;
       }
 
-      //Parse the response to json. 
+      //Parse the response to a user-readable format. 
       let obj = await response.json();
+
+      // START HERE WHEN EDITING NEXT
+      // for (let i = 0; i < json.data.length; i++) {
+      //   showCard(json.data[i]);
+      // }
+
       let characterMsg = JSON.stringify(obj.characters);
 
       //If we have a message, display it.
@@ -56,9 +62,12 @@
 
       const nameField = nameForm.querySelector('#nameField');
       const ageField = nameForm.querySelector('#ageField');
+      const heightField = nameForm.querySelector('#heightField');
+      const bioField = nameForm.querySelector('#bioField');
+      const imageField = nameForm.querySelector('#imageField');
 
       //Build a data string in the FORM-URLENCODED format.
-      const formData = `name=${nameField.value}&age=${ageField.value}`;
+      const formData = `name=${nameField.value}&age=${ageField.value}&height=${heightField.value}&bio=${bioField.value}&image=${imageField.value}`;
 
       //Make a fetch request and await a response. Set the method to
       //the one provided by the form (POST). Set the headers.
@@ -132,17 +141,26 @@
         <h3>POST Status Code Tests</h3>
         <!-- Form for entering character information -->
         <form id="nameForm" action="/addCharacter" method="post">
+          <!-- Input Fields -->
           <label for="name">Name: </label>
           <input id="nameField" type="text" name="name" />
+
           <label for="age">Age: </label>
           <input id="ageField" type="number" name="age" min="0" max="100" step="1" />
+
           <label for="height">Height: </label>
           <input id="heightField" type="text" name="height" />
+
           <label for="bio">Bio: </label>
           <input id="bioField" type="text" name="bio" />
+
+          <label for="image">Image Link: </label>
+          <input id="imageField" type="text" name="image" />
+
+          <!-- Buttons -->
           <input type="submit" value="Add Character" />
           <!-- Line from https://www.w3schools.com/html/html_form_input_types.asp -->
-          <input type="reset" />
+          <input type="reset" value="Reset Fields" />
         </form>
         <!-- Button to get list of all character information back -->
         <!-- Note to self, probably just remove the selects and options here, or replace -->

@@ -33,12 +33,12 @@ const getCharactersMeta = (request, response) => {
 const addCharacter = (request, response, body) => {
   // default json message
   const responseJSON = {
-    message: 'Name and age are both required.',
+    message: 'All fields are required.',
   };
 
   // check to make sure we have both fields
   // If either are missing, send back an error message as a 400 badRequest
-  if (!body.name || !body.age) {
+  if (!body.name || !body.age || !body.height || !body.bio || !body.image) {
     responseJSON.id = 'missingParams';
     return respondJSON(request, response, 400, responseJSON);
   }
@@ -56,6 +56,9 @@ const addCharacter = (request, response, body) => {
   // add or update fields for this character name
   characters[body.name].name = body.name;
   characters[body.name].age = body.age;
+  characters[body.name].height = body.height;
+  characters[body.name].bio = body.bio;
+  characters[body.name].image = body.image;
 
   // if response is created, then set our created message
   // and sent response with a message
