@@ -34,13 +34,8 @@
           break;
       }
 
-      //Parse the response to a user-readable format. 
+      //Create character object from response
       let obj = await response.json();
-
-      // START HERE WHEN EDITING NEXT
-      // for (let i = 0; i < json.data.length; i++) {
-      //   showCard(json.data[i]);
-      // }
 
       let characterMsg = JSON.stringify(obj.characters);
 
@@ -49,10 +44,28 @@
         content.innerHTML += `<p>${obj.message}</p>`;
       }
 
-      if (obj.characters) {
-        content.innerHTML += `<p>${characterMsg}</p>`;
+      //Call function to put together a readable card from the character object
+      for (const character in obj.characters) {
+        //Syntax referenced from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in
+        createCard(obj.characters[character]);
       }
     };
+
+    //Put together a readable card from a given character object
+    const createCard = character => {
+      const content = document.querySelector('#content');
+
+      //Fill in character information on the card
+      const charCard = document.createElement("div");
+      charCard.innerHTML += `<img src="${character.image}" alt="Character image" width="400" height="400">`;
+      charCard.innerHTML += `<h2>${character.name}</h2>`;
+      charCard.innerHTML += `<p>Age: ${character.age}</p>`;
+      charCard.innerHTML += `<p>Height: ${character.height}</p>`;
+      charCard.innerHTML += `<p>Bio: ${character.bio}</p><hr>`;
+
+      //Append the card to the content element
+      content.appendChild(charCard);
+    }
 
     //Uses fetch to send a postRequest. 
     const sendPost = async (nameForm) => {
@@ -86,8 +99,8 @@
 
     const requestUpdate = async (characterForm) => {
       //Grab all the info from the form
-      const url = characterForm.querySelector('#urlField').value;
-      const method = characterForm.querySelector('#methodSelect').value;
+      const url = "/getCharacters";
+      const method = "get";
 
       //Await our fetch response. Go to the URL, use the right method, and attach the headers.
       let response = await fetch(url, {
@@ -134,7 +147,7 @@
 
 
 <body>
-  <main class="pr-1">
+  <main class="pr-1 has-text-dark">
     <!-- User controls -->
     <div class="has-background-info is-three-quarters mr-1">
       <section id="top">
@@ -163,18 +176,8 @@
           <input type="reset" value="Reset Fields" />
         </form>
         <!-- Button to get list of all character information back -->
-        <!-- Note to self, probably just remove the selects and options here, or replace -->
         <form id="characterForm" action="/getCharacters" method="get">
-          <select id='urlField'>
-            <option value='/getCharacters'>/getCharacters</option>
-            <!-- <option value='/notReal'>/notReal</option> -->
-          </select>
-          <select id="methodSelect">
-            <option value="get">GET</option>
-            <!-- <option value="head">HEAD</option> -->
-          </select>
           <input type="submit" value="Get Characters" />
-        </form>
       </section>
     </div>
 
